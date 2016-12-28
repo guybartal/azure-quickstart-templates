@@ -121,7 +121,8 @@
       }
     },
     "websitepassword": {
-      "type": "securestring"
+      "type": "securestring",
+      "defaultValue": "websitepassword"
     }
      
   },
