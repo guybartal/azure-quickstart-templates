@@ -120,8 +120,7 @@
       }
     },
     "websitepassword": {
-      "type": "securestring",
-      "defaultValue": "websitepassword"
+      "type": "securestring"
     }
   },
   "variables": {
@@ -150,16 +149,6 @@
         "publicIPAllocationMethod": "Dynamic",
         "dnsSettings": {
           "domainNameLabel": "[parameters('dnsNamePrefix')]"
-        }
-      },
-      "parameters": {
-        "websitepassword": {
-          "reference": {
-            "secretName": "[parameters('websitepassword')]",
-            "keyVault": {
-              "id": "[resourceId(parameters('vaultResourceGroup'), 'Microsoft.KeyVault/vaults', parameters('vaultName'))]"
-            }
-          }
         }
       }
     },
