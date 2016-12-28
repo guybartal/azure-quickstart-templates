@@ -263,7 +263,7 @@
                   "publisher": "Microsoft.Compute",
                   "settings": {
                     "fileUris": [
-                      "[concat(parameters('artifactsLocation'), '/scripts/installapp.ps1', parameters('_artifactsLocationSasToken'))]"
+                      "[concat(parameters('artifactsLocation'), '/scripts/installapp.ps1', parameters('artifactsLocationSasToken'))]"
                     ]
                   },
                   "typeHandlerVersion": "1.8",
