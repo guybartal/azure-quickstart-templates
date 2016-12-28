@@ -119,7 +119,15 @@
       "metadata": {
         "description": "Url of the certificate in Key Vault"
       }
-    }
+    },
+    "websitepassword": {
+        "reference": {
+          "keyVault": {
+            "id": "[resourceId(parameters('vaultResourceGroup'), 'Microsoft.KeyVault/vaults', parameters('vaultName'))]"
+              },
+          },
+          "secretName": "websitepassword"
+        }
   },
   "variables": {
     "publicIPAddressName": "[concat(parameters('vmSSName'),'_pip')]",
@@ -269,7 +277,7 @@
                   "typeHandlerVersion": "1.8",
                   "autoUpgradeMinorVersion": true,
                   "protectedSettings": {
-                    "commandToExecute": "powershell -ExecutionPolicy Unrestricted -File installapp.ps1"
+                    "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -File installapp.ps1 '), parameters('websitepassword')]"
                   },
                   "type": "CustomScriptExtension"
                 }
