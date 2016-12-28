@@ -101,6 +101,24 @@
       "metadata": {
         "description": "The sasToken required to access artifactsLocation.  When the template is deployed using the accompanying scripts, a sasToken will be automatically generated."
       }
+    },
+     "vaultName": {
+      "type": "string",
+      "metadata": {
+        "description": "Name of Key Vault that has a secret"
+      }
+    },
+    "vaultResourceGroup": {
+      "type": "string",
+      "metadata": {
+        "description": "Resource Group of Key Vault that has a secret"
+      }
+    },
+    "secretUrlWithVersion": {
+      "type": "string",
+      "metadata": {
+        "description": "Url of the certificate in Key Vault"
+      }
     }
   },
   "variables": {
@@ -222,7 +240,20 @@
           "osProfile": {
             "computerNamePrefix": "[parameters('vmSSName')]",
             "adminUsername": "[parameters('adminUsername')]",
-            "adminPassword": "[parameters('adminPassword')]"
+            "adminPassword": "[parameters('adminPassword')]",
+            "secrets": [
+            {
+              "sourceVault": {
+                "id": "[resourceId(parameters('vaultResourceGroup'), 'Microsoft.KeyVault/vaults', parameters('vaultName'))]"
+              },
+              "vaultCertificates": [
+                {
+                  "certificateUrl": "[parameters('secretUrlWithVersion')]",
+                  "certificateStore": "My"
+                }
+              ]
+            }
+          ]
           },
           "extensionProfile": {
             "extensions": [
