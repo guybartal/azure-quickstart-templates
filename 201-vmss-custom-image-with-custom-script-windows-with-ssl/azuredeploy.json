@@ -30,7 +30,6 @@
       "type": "string",
       "allowedValues": [
         "Standard_D1_v2"
-
       ],
       "metadata": {
         "description": "The size of the VM instances Created"
@@ -102,7 +101,7 @@
         "description": "The sasToken required to access artifactsLocation.  When the template is deployed using the accompanying scripts, a sasToken will be automatically generated."
       }
     },
-     "vaultName": {
+    "vaultName": {
       "type": "string",
       "metadata": {
         "description": "Name of Key Vault that has a secret"
@@ -121,9 +120,9 @@
       }
     },
     "websitepassword": {
-      "type": "securestring"
+      "type": "securestring",
+      "defaultValue": "websitepassword"
     }
-     
   },
   "variables": {
     "publicIPAddressName": "[concat(parameters('vmSSName'),'_pip')]",
@@ -151,8 +150,17 @@
         "publicIPAllocationMethod": "Dynamic",
         "dnsSettings": {
           "domainNameLabel": "[parameters('dnsNamePrefix')]"
-        },
-        "websitepassword":"[parameters('websitepassword')]"
+        }
+      },
+      "parameters": {
+        "websitepassword": {
+          "reference": {
+            "secretName": "[parameters('websitepassword')]",
+            "keyVault": {
+              "id": "[resourceId(parameters('vaultResourceGroup'), 'Microsoft.KeyVault/vaults', parameters('vaultName'))]"
+            }
+          }
+        }
       }
     },
     {
@@ -247,18 +255,18 @@
             "adminUsername": "[parameters('adminUsername')]",
             "adminPassword": "[parameters('adminPassword')]",
             "secrets": [
-            {
-              "sourceVault": {
-                "id": "[resourceId(parameters('vaultResourceGroup'), 'Microsoft.KeyVault/vaults', parameters('vaultName'))]"
-              },
-              "vaultCertificates": [
-                {
-                  "certificateUrl": "[parameters('secretUrlWithVersion')]",
-                  "certificateStore": "My"
-                }
-              ]
-            }
-          ]
+              {
+                "sourceVault": {
+                  "id": "[resourceId(parameters('vaultResourceGroup'), 'Microsoft.KeyVault/vaults', parameters('vaultName'))]"
+                },
+                "vaultCertificates": [
+                  {
+                    "certificateUrl": "[parameters('secretUrlWithVersion')]",
+                    "certificateStore": "My"
+                  }
+                ]
+              }
+            ]
           },
           "extensionProfile": {
             "extensions": [

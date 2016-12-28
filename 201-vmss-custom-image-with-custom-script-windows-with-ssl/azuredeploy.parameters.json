@@ -2,14 +2,7 @@
 	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
 	"contentVersion": "1.0.0.0",
 	"parameters": {
-		"websitepassword": {
-			"reference": {
-				"secretName": "websitepassword",
-				"keyVault": {
-					"id": "[resourceId(parameters('vaultResourceGroup'), 'Microsoft.KeyVault/vaults', parameters('vaultName'))]"
-				}
-			}
-		},
+		
 		"vmSSName": {
 			"value": "GEN-UNIQUE"
 		}
