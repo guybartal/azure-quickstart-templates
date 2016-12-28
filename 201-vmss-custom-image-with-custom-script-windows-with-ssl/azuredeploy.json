@@ -121,8 +121,7 @@
       }
     },
     "websitepassword": {
-      "type": "securestring",
-      "defaultValue": "websitepassword"
+      "type": "securestring"
     }
      
   },
@@ -152,7 +151,8 @@
         "publicIPAllocationMethod": "Dynamic",
         "dnsSettings": {
           "domainNameLabel": "[parameters('dnsNamePrefix')]"
-        }
+        },
+        "websitepassword":"[parameters('websitepassword')]"
       }
     },
     {
