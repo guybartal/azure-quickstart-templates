@@ -89,7 +89,7 @@
       "defaultValue": 5
     },
     "artifactsLocation": {
-      "defaultValue": "https://raw.githubusercontent.com/guybartal/azure-quickstart-templates/master/201-vmss--custom-image-with-custom-script-windows-with-ssl",
+      "defaultValue": "https://raw.githubusercontent.com/guybartal/azure-quickstart-templates/master/201-vmss-custom-image-with-custom-script-windows-with-ssl",
       "type": "string",
       "metadata": {
         "description": "The base URI where artifacts required by this template are located. When the template is deployed using the accompanying scripts, a private location in the subscription will be used and this value will be automatically generated."
